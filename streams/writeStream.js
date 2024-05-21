@@ -4,7 +4,7 @@ const fs = require('fs/promises');
 console.time('writeMany');
 
 (async () => {
-    const file = await fs.open('test.txt', 'w');
+    const file = await fs.open('src.txt', 'w');
 
     stream = file.createWriteStream();
 
