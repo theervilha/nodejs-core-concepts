@@ -30,9 +30,13 @@ const fs = require('fs/promises');
             last_number_splitted = numbers.pop()
         }
 
-        if (!streamWrite.write(numbers)) {
-            streamRead.pause()
-        }
+        numbers.forEach((elem) => {
+            if (Number(elem) % 2 === 0) {
+                if (!streamWrite.write(`${elem}\n`)) {
+                    streamRead.pause();
+                }
+            }
+        });
         // console.log(chunk.length) // Length of highWaterMark is 65 KiB, not 16kb like a Writable stream
     })
 
@@ -47,6 +51,10 @@ const fs = require('fs/promises');
 
     streamWrite.on('drain', () => {
         streamRead.resume()
+    })
+
+    streamRead.on('end', () => {
+        console.log("Done reading.")
     })
 
 })()
