@@ -6,7 +6,7 @@ const fs = require('fs/promises');
 
 const server = net.createServer(() => { })
 
-let fileHandle;
+let fileHandle, fileWriteStream;
 
 server.on('connection', (socket) => {
     // Socket refers to the client endpoint
@@ -14,15 +14,28 @@ server.on('connection', (socket) => {
 
     socket.on('data', async (data) => {
         console.log('buffer received from client:', data);
-        fileHandle = await fs.open(`storage/test.txt`, 'w');
-        const fileStream = fileHandle.createWriteStream();
+        if (!fileHandle) {
+            // Pause receiving data to wait for the file to be opened
+            socket.pause()
+            fileHandle = await fs.open(`storage/test.txt`, 'w');
+            fileWriteStream = fileHandle.createWriteStream();
 
-        // Writing to our destination file
-        fileStream.write(data);
+            socket.resume()
+            fileWriteStream.on('drain', () => {
+                socket.resume()
+            })
+        }
+
+        if (!fileWriteStream.write(data)) {
+            console.log('server> stop sending data')
+            socket.pause()
+        }
     })
 
     socket.on('end', () => {
         fileHandle.close();
+        fileHandle = undefined;
+        fileWriteStream = undefined;
         console.log('Uploaded ended')
     })
 })
