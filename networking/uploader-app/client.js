@@ -2,12 +2,15 @@
 // Send the file to the server
 const net = require('net');
 const fs = require('fs/promises');
+const path = require('path')
 
 let fileReadStream;
 
 const socket = net.createConnection({ 'host': '::1', port: 5050 }, async () => {
-    const filePath = 'text.txt';
-    const fileHandle = await fs.open(filePath, "r");
+    const fileName = path.basename(process.argv[2]);
+    socket.write(`fileName: ${fileName}-->`)
+
+    const fileHandle = await fs.open(fileName, "r");
     fileReadStream = fileHandle.createReadStream();
 
     // Reading from source file and sending to server

@@ -17,18 +17,25 @@ server.on('connection', (socket) => {
         if (!fileHandle) {
             // Pause receiving data to wait for the file to be opened
             socket.pause()
-            fileHandle = await fs.open(`storage/test.txt`, 'w');
+
+            const endFileNameIndex = data.indexOf('-->')
+            const fileName = data.subarray(10, endFileNameIndex).toString('utf-8')
+            console.log(fileName)
+
+            fileHandle = await fs.open(`storage/${fileName}`, 'w');
             fileWriteStream = fileHandle.createWriteStream();
+
+            fileWriteStream.write(data.subarray(endFileNameIndex + 3))
 
             socket.resume()
             fileWriteStream.on('drain', () => {
                 socket.resume()
             })
-        }
-
-        if (!fileWriteStream.write(data)) {
-            console.log('server> stop sending data')
-            socket.pause()
+        } else {
+            if (!fileWriteStream.write(data)) {
+                console.log('server> stop sending data')
+                socket.pause()
+            }
         }
     })
 
