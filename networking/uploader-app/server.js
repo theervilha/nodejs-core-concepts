@@ -6,11 +6,10 @@ const fs = require('fs/promises');
 
 const server = net.createServer(() => { })
 
-let fileHandle, fileWriteStream;
-
 server.on('connection', (socket) => {
     // Socket refers to the client endpoint
     console.log('New connection!')
+    let fileHandle, fileWriteStream;
 
     socket.on('data', async (data) => {
         console.log('buffer received from client:', data);
