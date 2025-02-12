@@ -2,22 +2,6 @@
 
 This repository focuses on key concepts of Computer Science and Node.js
 
-### Content of this repository:
-
-- [x] File System
-- [x] Streams
-    - [x] Writable Stream
-    - [x] Readable Stream
-- [x] Networking
-    - [x] TCP explained
-        - [x] Simple TCP Server
-        - [x] Chat App
-        - [x] Uploader App
-    - [x] UDP explained with simple UDP server
-- [ ] HTTP
-    - [x] Simple HTTP server
-
-
 ### Studied Concepts
 
 - [x] Event Emitter
@@ -70,3 +54,19 @@ This repository focuses on key concepts of Computer Science and Node.js
         - [x] Handle routes
         - [x] Serve files
         - [ ] Create a Mini-Express Framework!
+
+### Content of this repository:
+
+- [x] File System
+- [x] Streams
+    - [x] Writable Stream
+    - [x] Readable Stream
+- [x] Networking
+    - [x] TCP explained
+        - [x] Simple TCP Server
+        - [x] Chat App
+        - [x] Uploader App
+    - [x] UDP explained with simple UDP server
+- [ ] HTTP
+    - [x] Simple HTTP server
+    - [x] Web server
