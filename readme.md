@@ -54,3 +54,19 @@ This repository focuses on key concepts of Computer Science and Node.js
     - [x] How it works
     - [x] Messages, Request and Response
     - [x] Connection Types
+    - [x] Create a HTTP Client
+    - [x] Create a HTTP Server
+    - [x] Understand Media Types (MIME Types)
+    - [x] HTTP Methods
+        - [x] GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS
+        - [X] Idempotent concept to decide what method to use
+    - [x] Status Codes
+        - [x] 100 ~ 199: Informational responses
+        - [x] 200 ~ 299: Successful responses
+        - [x] 300 ~ 399: For redirection
+        - [x] 400 ~ 499: Client errors
+        - [x] 500 ~ 599: Server errors
+    - [x] Web Server
+        - [x] Handle routes
+        - [x] Serve files
+        - [ ] Create a Mini-Express Framework!
