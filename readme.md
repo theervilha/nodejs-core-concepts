@@ -53,7 +53,10 @@ This repository focuses on key concepts of Computer Science and Node.js
     - [x] Web Server
         - [x] Handle routes
         - [x] Serve files
-        - [ ] Create a Mini-Express Framework!
+        - [x] Create a Mini-Express Framework!
+    - [x] HTTP Proxies
+    - [x] Cookies
+    - [ ] Middlewares
 
 ### Content of this repository:
 
@@ -70,3 +73,4 @@ This repository focuses on key concepts of Computer Science and Node.js
 - [ ] HTTP
     - [x] Simple HTTP server
     - [x] Web server
+    - [x] Poster application

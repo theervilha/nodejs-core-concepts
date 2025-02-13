@@ -1,6 +1,5 @@
 const http = require('node:http');
 const fs = require('node:fs/promises');
-const { error } = require('node:console');
 
 class Butter {
     
@@ -9,21 +8,18 @@ class Butter {
         this.routes = []
 
         this.server.on('request', (req, res) => {
-            console.log("New Request arrived:",req.url)
-
             const BR = new ButterResponse(req, res)
 
             const route = this.routes.filter(row => row.url === req.url && row.method === req.method)[0]
             if (route)
                 return route.callback(req, BR)
             
-            return BR.status(404).json({error: 'Route not found'})
+            return BR.status(404).json({error: `Cannot ${req.method} ${req.url}`})
         })
     }
 
     route(method, url, callback) {
         this.routes.push({url, method, callback})
-        console.log('Added new route:',this.routes)
     }
 
     listen = (port, cb) => {
