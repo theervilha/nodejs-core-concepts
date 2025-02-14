@@ -134,7 +134,13 @@ server.route('POST', '/api/login', (req, res) => {
 })
 
 server.route('DELETE', '/api/logout', (req, res) => {
-    
+    const sessionIndex = SESSIONS.findIndex(session => session.userId === req.userId)
+    if (sessionIndex !== -1) {
+        SESSIONS.splice(sessionIndex, 1)
+    }
+
+    res.res.setHeader('Set-Cookie', 'token=deleted; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT')
+    res.status(200).json({message: "User deleted successfully"})
 })
 
 
@@ -144,10 +150,32 @@ server.route('GET', '/api/user', (req, res) => {
 })
 
 server.route('PUT', '/api/user', (req, res) => {
+    const { username, password, name } = req.body;
+
+    const user = USERS.find(user => user.id === req.userId)
+    user.username = username
+    user.name = name
+
+    if (password) {
+        user.password = password
+    }
+
+    res.status(200).json({username, name, password_status: password ? "updated" : "not updated"})
 })
 
 
 server.route('POST', '/api/posts', (req, res) => {
+    const { title, body } = req.body;
+
+    const post = {
+        id: POSTS.length + 1,
+        title,
+        body,
+        userId: req.userId
+    }
+
+    POSTS.unshift(post) // Adds at the beginning of array
+    res.status(201).json(post);
 })
 
 
