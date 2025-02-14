@@ -56,7 +56,7 @@ This repository focuses on key concepts of Computer Science and Node.js
         - [x] Create a Mini-Express Framework!
     - [x] HTTP Proxies
     - [x] Cookies
-    - [ ] Middlewares
+    - [x] Middlewares
 
 ### Content of this repository:
 
